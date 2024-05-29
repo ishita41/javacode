@@ -1,12 +1,12 @@
 import java.util.Scanner;
 
-public class aextra {
+public class binarysearchsqrt {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
         int n = sc.nextInt();
         int s = 0;
         int e = n;
-        int ans = -1;
+        int ans = 0;
         while (s <= e) {
             int mid = s + (e - s) / 2;
             if (mid <= n / mid) {
