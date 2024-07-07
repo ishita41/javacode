@@ -1,26 +1,35 @@
-import java.util.Arrays;
-import java.util.HashSet;
+import java.util.ArrayList;
 import java.util.Scanner;
-import java.util.Set;
+import java.util.Stack;
 
 public class aextra {
     public static void main(String[] args) {
         Scanner sc = new Scanner(System.in);
-        int n = sc.nextInt();
-        int a[] = new int[n];
-        for (int i = 0; i < n; i++) {
-            a[i] = sc.nextInt();
-        }
-        int k = sc.nextInt();
-        int ans = -1;
-        for (int i = 0; i < n; i++) {
-            if (a[i] == k) {
-                ans = i;
-                break;
+        String s = sc.nextLine();
+        Stack<Character> st = new Stack<>();
+        boolean balanced = true;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (s.charAt(i) == '(' || s.charAt(i) == '[' || s.charAt(i) == '{') {
+                st.push(ch);
             } else {
-                ans = -1;
+                if (st.isEmpty()) {
+                    balanced = false;
+                    break;
+                }
+                if ((s.charAt(i) == ']' && st.peek() == '[') || (s.charAt(i) == '}' && st.peek() == '}')
+                        || (s.charAt(i) == ')' && st.peek() == '(')) {
+                    st.pop();
+                } else {
+                    balanced = false;
+                    break;
+                }
             }
         }
-        System.out.println(ans);
+        if (balanced && st.isEmpty()) {
+            System.out.println("balanced");
+        } else {
+            System.out.println("Not balanced");
+        }
     }
 }
